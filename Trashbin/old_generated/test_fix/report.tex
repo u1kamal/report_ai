@@ -1,0 +1,508 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{eso-pic}
+\usepackage{tikz}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{etoolbox}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue,
+    pdftitle={Internship Report},
+    pdfauthor={Kamal S}
+}
+
+% -- Spacing ----------------------------------------------------------------
+\setstretch{1.5}
+\setlength{\parindent}{1.5em}
+\setlength{\parskip}{0.4em}
+
+% -- Chapter heading format -------------------------------------------------
+\titleformat{\chapter}[display]
+  {\bfseries\Large}
+  {\chaptername~\thechapter}{10pt}{\Huge}
+
+% -- Toggle: border ON/OFF --------------------------------------------------
+% We define a boolean that controls whether borders are drawn.
+% Front-matter pages: border ON.  Chapter pages: border OFF.
+\newif\ifshowborder
+\showbordertrue  % start with borders ON
+
+\AddToShipoutPictureBG{%
+  \ifshowborder
+  \begin{tikzpicture}[remember picture, overlay]
+    \draw[line width=0.56pt]
+      ([xshift=18pt, yshift=-18pt]current page.north west)
+      rectangle
+      ([xshift=-18pt, yshift=18pt]current page.south east);
+    \draw[line width=0.28pt]
+      ([xshift=20pt, yshift=-20pt]current page.north west)
+      rectangle
+      ([xshift=-20pt, yshift=20pt]current page.south east);
+  \end{tikzpicture}%
+  \fi
+}
+
+% -- Page styles ------------------------------------------------------------
+
+% Style for front-matter: no header/footer, just centered page number
+\fancypagestyle{frontmatter}{
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+  \fancyfoot[C]{\thepage}
+}
+
+% Style for main content: header + footer, no border
+\fancypagestyle{mainchapter}{
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0.4pt}
+  \renewcommand{\footrulewidth}{0.4pt}
+  \fancyhead[L]{\small Full Stack Developer}
+  \fancyhead[R]{\small\nouppercase{\leftmark}}
+  \fancyfoot[L]{\small Dept. of ECE, Vemana IT}
+  \fancyfoot[C]{\small 2025-2026}
+  \fancyfoot[R]{\small Page \thepage\ of \pageref{LastPage}}
+}
+
+% Plain style for front-matter (used by \chapter*, \listoffigures, etc.)
+% Initially just centered page number. Redefined before main content.
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+  \fancyfoot[C]{\thepage}
+}
+
+\begin{document}
+
+% ==========================================================================
+% TITLE PAGE  (single-spaced, zero parskip so it fits on one page)
+% ==========================================================================
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{singlespacing}
+\setlength{\parskip}{0pt}
+\setlength{\parindent}{0pt}
+\centering
+\vspace*{-0.8cm}
+
+{\Large \textbf{VISVESVARAYA TECHNOLOGICAL UNIVERSITY}\par}
+\vspace{2pt}
+{\large \textbf{Jnana Sangama, Belagavi -- 590018}\par}
+\vspace{6pt}
+\includegraphics[height=2.8cm]{images/vtu_logo.png}\par
+\vspace{6pt}
+{\itshape An Internship Report\par}
+\vspace{2pt}
+{\itshape On\par}
+\vspace{2pt}
+{\Large \textbf{\textquotedblleft Full Stack Developer\textquotedblright}\par}
+\vspace{2pt}
+{\textcolor{red}{01/02/2026 to 01/04/2026}\par}
+\vspace{8pt}
+{\itshape Submitted in partial fulfillment of the requirements for the award of the degree of\par}
+\vspace{2pt}
+{\large \textbf{Bachelor of Engineering}\par}
+\vspace{1pt}
+{\large \textbf{in}\par}
+\vspace{1pt}
+{\large \textbf{\textcolor{blue}{Electronics and Communication Engineering}}\par}
+\vspace{8pt}
+Submitted by\par
+\vspace{2pt}
+{\large \textbf{KAMAL S \hspace{2cm} 1VI22EC066}\par}
+\vspace{6pt}
+\includegraphics[height=2.8cm]{images/vit_logo.png}\par
+\vspace{8pt}
+{\large \textbf{DEPARTMENT OF ELECTRONICS AND COMMUNICATION ENGINEERING}\par}
+{\Large \textbf{VEMANA INSTITUTE OF TECHNOLOGY}\par}
+{\large BENGALURU -- 560034\par}
+\vspace{4pt}
+{\Large \textbf{2025-2026}\par}
+
+\end{singlespacing}
+\end{titlepage}
+
+% ==========================================================================
+% FRONT MATTER — borders ON, roman numbering, no headers/footers
+% ==========================================================================
+\pagenumbering{roman}
+\setcounter{page}{1}
+\pagestyle{frontmatter}
+
+% ==========================================================================
+% CERTIFICATE PAGE
+% ==========================================================================
+\begin{singlespacing}
+\setlength{\parskip}{0pt}
+\setlength{\parindent}{0pt}
+\begin{center}
+{\large \textbf{Karnataka ReddyJana Sangha}\par}
+\vspace{2pt}
+{\Large \textbf{VEMANA INSTITUTE OF TECHNOLOGY}\par}
+\vspace{2pt}
+(Affiliated to Visvesvaraya Technological University, Belagavi)\par
+Koramangala, Bengaluru--560034\par
+\vspace{8pt}
+\includegraphics[height=1.5cm]{images/dept_seal.png}\par
+\vspace{8pt}
+{\large \textbf{DEPARTMENT OF}\par}
+{\large \textbf{ELECTRONICS AND COMMUNICATION ENGINEERING}\par}
+\vspace{10pt}
+{\Large \textbf{CERTIFICATE}\par}
+\end{center}
+\end{singlespacing}
+
+\vspace{6pt}
+\setlength{\parindent}{1.5em}
+This is to certify that the internship entitled \textbf{\textquotedblleft Full Stack Developer\textquotedblright} is a bonafide work carried out by \textbf{KAMAL S (1VI22EC066)} in partial fulfilment of the requirements for the award of Bachelor of Engineering degree in \textbf{Electronics and Communication Engineering}, Visvesvaraya Technological University, Belagavi, during the academic year 2025-2026.
+
+It is certified that all corrections and suggestions indicated for internal assessment have been duly incorporated in the report. The internship report has been approved as it satisfies the academic requirements prescribed for the said degree.
+
+% -- Watermark: VIT logo behind signatures ---------------------------------
+\AddToShipoutPictureFG*{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[opacity=0.10] at ([yshift=-5cm]current page.center) {%
+      \includegraphics[height=5cm]{images/vit_logo.png}%
+    };
+  \end{tikzpicture}%
+}
+
+\vspace{0.6cm}
+\begin{center}
+\begin{tabular}{p{0.22\textwidth} p{0.22\textwidth} p{0.22\textwidth} p{0.22\textwidth}}
+\textbf{Internal Supervisor} & \textbf{External Supervisor} & \textbf{HOD} & \textbf{Principal} \\
+(Prof. Suma B V) & (Mr. Maneesh Kumar Varma) & (Dr. Suneeta) & (Dr. Vijayasimha Reddy B G) \\
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+\textbf{Name of the Examiners} \hfill \textbf{Signature with Date}\par
+\vspace{0.2cm}
+1.\enspace\rule{5cm}{0.4pt} \hfill \rule{3.5cm}{0.4pt}\par
+\vspace{0.4cm}
+2.\enspace\rule{5cm}{0.4pt} \hfill \rule{3.5cm}{0.4pt}\par
+
+
+
+% ==========================================================================
+% ACKNOWLEDGEMENT
+% ==========================================================================
+\newpage
+\begin{center}
+{\Large \textbf{ACKNOWLEDGEMENT}\par}
+\end{center}
+\addcontentsline{toc}{chapter}{Acknowledgement}
+
+\vspace{0.5cm}
+\setlength{\parindent}{1.5em}
+\begin{onehalfspacing}
+I sincerely thank Visvesvaraya Technological University (VTU) for providing me with the opportunity to undertake this internship as a part of the academic curriculum, which has contributed significantly to my learning and overall development.
+
+I express my sincere gratitude to Dr. Vijayasimha Reddy B G, Principal, Vemana Institute of Technology, Bengaluru, for providing the necessary infrastructure, encouragement, and support to successfully carry out the internship work.
+
+I extend my heartfelt thanks to Dr. Suneeta, Head of the Department, Electronics and Communication Engineering, Vemana Institute of Technology, for their constant guidance, motivation, and encouragement throughout the internship duration.
+
+I would also like to thank Internal Supervisor Prof. Suma B V, External Supervisor Mr. Maneesh Kumar Varma, and all Internship Coordinators for their cooperation, coordination, and support during the internship period.
+
+I am thankful to all the teaching and non-teaching staff members of the Department of Electronics and Communication Engineering for their support and encouragement throughout the internship.
+
+I also acknowledge the support of Supram Technologies for providing structured learning resources and an environment that encouraged systematic understanding, practical application, and continuous improvement.
+\end{onehalfspacing}
+
+\vspace{1cm}
+\begin{flushright}
+\textbf{Kamal S}\par
+1VI22EC066\par
+\end{flushright}
+
+% ==========================================================================
+% ABSTRACT
+% ==========================================================================
+\newpage
+\begin{center}
+{\Large \textbf{ABSTRACT}\par}
+\end{center}
+\addcontentsline{toc}{chapter}{Abstract}
+
+\vspace{0.5cm}
+\setlength{\parindent}{1.5em}
+
+During my internship at Supram Technologies as a Full Stack Developer, I gained exposure to multiple domains including industrial UI design, embedded systems, middleware, and system-level development.
+
+
+% ==========================================================================
+% TABLE OF CONTENTS — Custom table format matching template
+% ==========================================================================
+\newpage
+\begin{center}
+{\Large \textbf{TABLE OF CONTENTS}\par}
+\end{center}
+\addcontentsline{toc}{chapter}{Table of Contents}
+
+\vspace{0.3cm}
+\begin{tabular}{@{} p{1.8cm} p{10.5cm} r @{}}
+\textbf{Chapter} & \textbf{Title} & \textbf{Page No} \\
+\midrule
+ & Certificate & i \\
+ & Acknowledgement & ii \\
+ & Abstract & iii \\
+ & Table of Contents & iv \\
+ & List of Figures & vi \\
+\addlinespace[4pt]
+\textbf{1} & \textbf{INTRODUCTION} & \\
+ & 1.1~~Internship Scope and Objectives & \\
+ & 1.2~~Relevance of Full Stack Developer to Electronics and Communication Engineering & \\
+ & 1.3~~Evolution of Practices in the Field & \\
+ & 1.4~~Current Trends and Technologies & \\
+\addlinespace[4pt]
+\textbf{2} & \textbf{ORGANISATION PROFILE} & \\
+ & 2.1~~Introduction & \\
+ & 2.2~~Vision and Mission of the Organization & \\
+ & 2.3~~Programs and Services Offered & \\
+ & 2.4~~Organizational Impact and Reach & \\
+ & 2.5~~Core Values & \\
+\addlinespace[4pt]
+\textbf{3} & \textbf{WORK DONE / METHODOLOGY} & \\
+ & 3.1~~Overview of Internship Work & \\
+ & 3.2~~Tools and Technologies Used & \\
+ & 3.3~~Work Process and Methodology & \\
+ & 3.4~~Key Project and Case Study & \\
+ & 3.5~~Challenges Faced & \\
+ & 3.6~~Solutions Implemented & \\
+\addlinespace[4pt]
+\textbf{4} & \textbf{RESULTS AND DISCUSSION} & \\
+ & 4.1~~Outcomes of the Work & \\
+ & 4.2~~Learning Outcomes & \\
+ & 4.3~~Analysis & \\
+\addlinespace[4pt]
+\textbf{5} & \textbf{CONCLUSION} & \\
+ & 5.1~~Summary & \\
+ & 5.2~~Personal Growth & \\
+ & 5.3~~Future Scope & \\
+\end{tabular}
+
+% ==========================================================================
+% LIST OF FIGURES — Custom table format matching template
+% ==========================================================================
+\newpage
+\begin{center}
+{\Large \textbf{LIST OF FIGURES}\par}
+\end{center}
+\addcontentsline{toc}{chapter}{List of Figures}
+
+\vspace{0.3cm}
+\begin{tabular}{@{} p{2cm} p{10cm} r @{}}
+\textbf{Figure No} & \textbf{Title} & \textbf{Page No} \\
+\midrule
+\end{tabular}
+
+% Note: Figures are auto-populated when images are included in chapters.
+% For accurate page numbers, compile twice.
+\listoffigures
+
+% ==========================================================================
+% MAIN CONTENT — borders OFF, headers/footers ON, arabic numbering
+% ==========================================================================
+\newpage
+\showborderfalse       % TURN OFF borders for all remaining pages
+\pagenumbering{arabic}
+
+% NOW redefine plain style for chapter first pages (with footer)
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0.4pt}
+  \fancyfoot[L]{\small Dept. of ECE, Vemana IT}
+  \fancyfoot[C]{\small 2025-2026}
+  \fancyfoot[R]{\small Page \thepage\ of \pageref{LastPage}}
+}
+\pagestyle{mainchapter}
+
+% ==========================================================================
+% CHAPTER 1: INTRODUCTION
+% ==========================================================================
+\chapter{INTRODUCTION}
+\label{ch:intro}
+
+
+This chapter introduces the internship.
+
+
+\section{Internship Scope and Objectives}
+
+The scope was to gain practical knowledge.
+
+
+\section{Relevance of Full Stack Developer to Electronics and Communication Engineering}
+
+Full stack development is relevant to ECE.
+
+
+\section{Evolution of Practices in the Field}
+
+Engineering systems have evolved significantly.
+
+
+\section{Current Trends and Technologies}
+
+Current trends include embedded AI platforms.
+
+
+
+
+% ==========================================================================
+% CHAPTER 2: ORGANISATION PROFILE
+% ==========================================================================
+\chapter{ORGANISATION PROFILE}
+\label{ch:org}
+
+
+Overview of Supram Technologies.
+
+
+\section{Introduction}
+
+Supram Technologies is a technology company.
+
+
+
+
+\section{Vision and Mission of the Organization}
+
+To be a leader in embedded systems.
+
+
+\section{Programs and Services Offered}
+
+Internship programs and training workshops.
+
+
+\section{Organizational Impact and Reach}
+
+Significant contributions to the field.
+
+
+\section{Core Values}
+
+Innovation, integrity, and excellence.
+
+
+
+
+% ==========================================================================
+% CHAPTER 3: WORK DONE / METHODOLOGY
+% ==========================================================================
+\chapter{WORK DONE / METHODOLOGY}
+\label{ch:work}
+
+
+Work completed during the internship.
+
+
+\section{Overview of Internship Work}
+
+Multiple projects spanning UI design and embedded systems.
+
+
+\section{Tools and Technologies Used}
+
+React, Node.js, Python, ROS.
+
+
+
+
+\section{Work Process and Methodology}
+
+Agile methodology with weekly sprints.
+
+
+\section{Key Project and Case Study}
+
+Building an industrial dashboard.
+
+
+
+
+\section{Challenges Faced}
+
+Integrating multiple systems.
+
+
+\section{Solutions Implemented}
+
+Using middleware for system integration.
+
+
+% ==========================================================================
+% CHAPTER 4: RESULTS AND DISCUSSION
+% ==========================================================================
+\chapter{RESULTS AND DISCUSSION}
+\label{ch:results}
+
+
+Results and discussion.
+
+
+
+
+\section{Outcomes of the Work}
+
+Several working prototypes.
+
+
+\section{Learning Outcomes}
+
+Understanding of embedded systems.
+
+
+\section{Analysis}
+
+Valuable hands-on experience.
+
+
+
+
+% ==========================================================================
+% CHAPTER 5: CONCLUSION
+% ==========================================================================
+\chapter{CONCLUSION}
+\label{ch:conclusion}
+
+
+Summary of the internship.
+
+
+
+
+\section{Summary}
+
+Comprehensive exposure to full stack development.
+
+
+\section{Personal Growth}
+
+Improved technical skills.
+
+
+\section{Future Scope}
+
+Deeper exploration of embedded AI.
+
+
+\end{document}

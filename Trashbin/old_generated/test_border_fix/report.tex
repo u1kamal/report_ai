@@ -1,0 +1,337 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{eso-pic}        % For page borders and watermarks
+\usepackage{tikz}           % For drawing borders
+\usepackage{graphicx}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue,
+    pdftitle={Internship Report},
+    pdfauthor={KAMAL S}
+}
+
+\setstretch{1.3}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+
+\titleformat{\chapter}[display]
+  {\bfseries\Large}
+  {\chaptername~\thechapter}{10pt}{\Huge}
+
+% ── Double border on every page ──────────────────────────────────────────────
+\AddToShipoutPictureBG{%
+  \begin{tikzpicture}[remember picture, overlay]
+    % Outer border (thicker, 0.56pt)
+    \draw[line width=0.56pt] 
+      ([xshift=18pt, yshift=-18pt]current page.north west) 
+      rectangle 
+      ([xshift=-18pt, yshift=18pt]current page.south east);
+    % Inner border (thinner, 0.28pt)
+    \draw[line width=0.28pt] 
+      ([xshift=20pt, yshift=-20pt]current page.north west) 
+      rectangle 
+      ([xshift=-20pt, yshift=20pt]current page.south east);
+  \end{tikzpicture}%
+}
+
+\begin{document}
+
+% ── TITLE PAGE ────────────────────────────────────────────────────────────────
+\begin{titlepage}
+\centering
+\vspace*{-0.5cm}
+{\Large \textbf{VISVESVARAYA TECHNOLOGICAL UNIVERSITY}\par}
+\vspace{0.2cm}
+{\large \textbf{Jnana Sangama, Belagavi -- 590018}\par}
+\vspace{0.3cm}
+\includegraphics[height=3.2cm]{images/vtu_logo.png}\par
+\vspace{0.3cm}
+{\itshape An Internship Report\par}
+\vspace{0.2cm}
+{\itshape On\par}
+\vspace{0.2cm}
+{\Large \textbf{\textquotedblleft FullStack developer\textquotedblright}\par}
+\vspace{0.2cm}
+{\textcolor{red}{Jan 27 to April 27}\par}
+\vspace{0.5cm}
+{\itshape Submitted in partial fulfillment of the requirements for the award of the degree of\par}
+\vspace{0.2cm}
+{\large \textbf{Bachelor of Engineering}\par}
+\vspace{0.1cm}
+{\large \textbf{in}\par}
+\vspace{0.1cm}
+{\large \textbf{\textcolor{blue}{Electronics and communications}}\par}
+\vspace{0.5cm}
+Submitted by\par
+\vspace{0.2cm}
+{\large KAMAL S\par}
+{\large 1VI22EC066\par}
+\vspace{0.3cm}
+\includegraphics[height=3.2cm]{images/vit_logo.png}\par
+\vfill
+{\large \textbf{DEPARTMENT OF ELECTRONICS AND COMMUNICATIONS}\par}
+{\Large \textbf{VEMANA INSTITUTE OF TECHNOLOGY}\par}
+{\large BENGALURU -- 560034\par}
+\vspace{0.3cm}
+{\Large \textbf{2025-2026}\par}
+\end{titlepage}
+
+% ── CERTIFICATE PAGE ──────────────────────────────────────────────────────────
+\pagenumbering{roman}
+\setcounter{page}{1}
+\begin{center}
+{\Large \textbf{Karnataka ReddyJana Sangha}\par}
+{\Large \textbf{VEMANA INSTITUTE OF TECHNOLOGY}\par}
+(Affiliated to Visvesvaraya Technological University, Belagavi)\par
+Koramangala, Bengaluru--560034\par
+\vspace{0.4cm}
+\includegraphics[height=1.8cm]{images/dept_seal.png}\par
+\vspace{0.4cm}
+{\large \textbf{DEPARTMENT OF}\par}
+{\large \textbf{ELECTRONICS AND COMMUNICATIONS}\par}
+\vspace{0.6cm}
+{\Large \textbf{CERTIFICATE}\par}
+\end{center}
+
+\vspace{0.3cm}
+This is to certify that the internship entitled \textbf{\textquotedblleft FullStack developer\textquotedblright} is a bonafide work carried out by \textbf{KAMAL S (1VI22EC066)} in partial fulfilment of the requirements for the award of Bachelor of Engineering degree in \textbf{Electronics and communications}, Visvesvaraya Technological University, Belagavi, during the academic year 2025-2026.
+
+It is certified that all corrections and suggestions indicated for internal assessment have been duly incorporated in the report. The internship report has been approved as it satisfies the academic requirements prescribed for the said degree.
+
+% ── Watermark: VIT logo behind signatures ────────────────────────────────────
+\AddToShipoutPictureFG*{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[opacity=0.12] at ([yshift=-6cm]current page.center) {%
+      \includegraphics[height=6cm]{images/vit_logo.png}%
+    };
+  \end{tikzpicture}%
+}
+
+\vspace{1cm}
+\begin{center}
+\begin{tabular}{p{0.23\textwidth} p{0.23\textwidth} p{0.23\textwidth} p{0.23\textwidth}}
+\textbf{Internal Supervisor} & \textbf{External Supervisor} & \textbf{HOD} & \textbf{Principal} \\
+(Prof. Suma B V) & (Maneesh Kumar Varma) & (Dr. Suneeta) & (Dr. Vijayasimha Reddy B G) \\
+\end{tabular}
+\end{center}
+
+\vspace{0.8cm}
+\textbf{Name of the Examiners} \hfill \textbf{Signature with Date}\par
+\vspace{0.3cm}
+1.\enspace\rule{5cm}{0.4pt} \hfill \rule{3.5cm}{0.4pt}\par
+\vspace{0.5cm}
+2.\enspace\rule{5cm}{0.4pt} \hfill \rule{3.5cm}{0.4pt}\par
+
+
+
+% ── ACKNOWLEDGEMENT ───────────────────────────────────────────────────────────
+\newpage
+\chapter*{ACKNOWLEDGEMENT}
+\addcontentsline{toc}{chapter}{Acknowledgement}
+
+I sincerely thank Visvesvaraya Technological University (VTU) for providing me with the opportunity to undertake this internship as a part of the academic curriculum, which has contributed significantly to my learning and overall development.
+
+I express my sincere gratitude to Dr. Vijayasimha Reddy B G, Principal, Vemana Institute of Technology, Bengaluru, for providing the necessary infrastructure, encouragement, and support to successfully carry out the internship work.
+
+I extend my heartfelt thanks to Dr. Suneeta, Head of the Department, Electronics and communications, Vemana Institute of Technology, for their constant guidance, motivation, and encouragement throughout the internship duration.
+
+I would also like to thank Internal Supervisor Prof. Suma B V, External Supervisor Maneesh Kumar Varma, and all Internship Coordinators for their cooperation, coordination, and support during the internship period.
+
+I am thankful to all the teaching and non-teaching staff members of the Department of Electronics and communications for their support and encouragement throughout the internship.
+
+I also acknowledge the support of Edutainer for providing structured learning resources and an environment that encouraged systematic understanding, practical application, and continuous improvement.
+
+\vspace{0.5cm}
+KAMAL S\par
+1VI22EC066\par
+
+% ── ABSTRACT ─────────────────────────────────────────────────────────────────
+\newpage
+\chapter*{ABSTRACT}
+\addcontentsline{toc}{chapter}{Abstract}
+
+
+This report presents the internship on FullStack developer.
+
+
+% ── TABLE OF CONTENTS ────────────────────────────────────────────────────────
+\newpage
+\tableofcontents
+\addcontentsline{toc}{chapter}{Table of Contents}
+
+\newpage
+\listoffigures
+\addcontentsline{toc}{chapter}{List of Figures}
+
+% ── CHAPTER 1: INTRODUCTION ──────────────────────────────────────────────────
+\pagenumbering{arabic}
+\chapter{INTRODUCTION}
+
+
+Introduction to the internship.
+
+
+\section{Internship Scope and Objectives}
+
+Scope of the internship.
+
+
+\section{Relevance of FullStack developer to Electronics and communications}
+
+Relevance.
+
+
+\section{Evolution of Practices in the Field}
+
+Evolution.
+
+
+\section{Current Trends and Technologies}
+
+Trends.
+
+
+
+
+% ── CHAPTER 2: ORGANISATION PROFILE ──────────────────────────────────────────
+\chapter{ORGANISATION PROFILE}
+
+
+Org intro.
+
+
+\section{Introduction}
+
+Company intro.
+
+
+
+
+\section{Vision and Mission of the Organization}
+
+Vision.
+
+
+\section{Programs and Services Offered}
+
+Programs.
+
+
+\section{Organizational Impact and Reach}
+
+Impact.
+
+
+\section{Core Values}
+
+Values.
+
+
+
+
+% ── CHAPTER 3: WORK DONE / METHODOLOGY ────────────────────────────────────────
+\chapter{WORK DONE / METHODOLOGY}
+
+
+Work overview.
+
+
+\section{Overview of Internship Work}
+
+Work.
+
+
+\section{Tools and Technologies Used}
+
+Tools.
+
+
+
+
+\section{Work Process and Methodology}
+
+Process.
+
+
+\section{Key Project and Case Study}
+
+Case study.
+
+
+
+
+\section{Challenges Faced}
+
+Challenges.
+
+
+\section{Solutions Implemented}
+
+Solutions.
+
+
+% ── CHAPTER 4: RESULTS AND DISCUSSION ────────────────────────────────────────
+\chapter{RESULTS AND DISCUSSION}
+
+
+Results intro.
+
+
+
+
+\section{Outcomes of the Work}
+
+Outcomes.
+
+
+\section{Learning Outcomes}
+
+Learning.
+
+
+\section{Analysis}
+
+Analysis.
+
+
+
+
+% ── CHAPTER 5: CONCLUSION ────────────────────────────────────────────────────
+\chapter{CONCLUSION}
+
+
+Conclusion intro.
+
+
+
+
+\section{Summary}
+
+Summary.
+
+
+\section{Personal Growth}
+
+Growth.
+
+
+\section{Future Scope}
+
+Future.
+
+
+\end{document}
